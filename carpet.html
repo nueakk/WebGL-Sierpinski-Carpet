@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Sierpinski Carpet - WebGL</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .controls {
+            margin-top: 15px;
+            display: inline-block;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .control-group {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+    </style>
+
+    <script id="vertex-shader" type="x-shader/x-vertex">
+        attribute vec4 vPosition;
+        void main() {
+            gl_Position = vPosition;
+        }
+    </script>
+
+    <script id="fragment-shader" type="x-shader/x-fragment">
+        precision mediump float;
+        uniform vec4 uColor;
+        void main() {
+            gl_FragColor = uColor;
+        }
+    </script>
+
+    <script type="text/javascript" src="./Common/webgl-utils.js"></script>
+    <script type="text/javascript" src="./Common/initShaders.js"></script>
+    <script type="text/javascript" src="./Common/MV.js"></script>
+    
+    <script type="text/javascript" src="carpet.js"></script>
+</head>
+<body>
+    <h2>WebGL Sierpinski Carpet</h2>
+    
+    <canvas id="gl-canvas" width="512" height="512">
+        브라우저가 HTML5 Canvas를 지원하지 않습니다.
+    </canvas>
+
+    <br>
+
+    <div class="controls">
+        <div class="control-group">
+            <label for="subdiv-slider"><strong>분할 단계 (Subdivision):</strong></label>
+            <input id="subdiv-slider" type="range" min="0" max="5" step="1" value="3" />
+            <span id="subdiv-val" style="min-width: 20px; font-weight: bold;">3</span>
+        </div>
+
+        <div class="control-group">
+            <label for="color-picker"><strong>카펫 색상 선택:</strong></label>
+            <input id="color-picker" type="color" value="#008080" />
+        </div>
+    </div>
+</body>
+</html>
